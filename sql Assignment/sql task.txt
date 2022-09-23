@@ -1,0 +1,168 @@
+ Create Database assignment_database;
+ use  assignment_database;
+// TASK============================================ 01
+create table shopping_history
+(
+product varchar not null,
+quantity integer not null,
+unit_price integer not null);
+  
+INSERT INTO shopping_history(product,quantity,unit_price) VALUES('MILK',3,10),
+('BREED',7,3),
+('BREAD',5,25),
+('BUTTER',3,10),
+('ICECREAM',6,25);
+
+SELECT * FROM shopping_history;
+
+SELECT product,(quantity * unit_price ) AS TOTAL_PRICE FROM shopping_history;
+
+//TASK============================================ 02
+PART=========================01
+CREATE TABLE phones
+(
+NAME varchar not null,
+PHONE_NUMBER INTEGER not null
+);
+
+CREATE OR REPLACE TABLE CALLS
+(
+ID INTEGER NOT NULL,
+  CALLER INTEGER NOT NULL,
+  CALLEE INTEGER NOT NULL,
+  DURATION INTEGER NOT NULL,
+  unique(ID)
+);
+
+INSERT INTO PHONES(NAME,PHONE_NUMBER) VALUES('JACK',1234),
+('LENA',3333),
+('MARK',9999),
+('ANNA',7582);
+
+INSERT INTO CALLS VALUES(25,1234,7582,8),
+(7,9999,7582,1),
+(18,9999,3333,4),
+(2,7582,3333,3),
+(3,3333,1234,1),
+(21,3333,1234,1);
+SELECT name
+FROM phones JOIN calls ON phones.phone_number = calls.caller
+UNION 
+SELECT name
+FROM phones JOIN calls ON phones.phone_number = calls.callee
+GROUP BY name
+HAVING SUM(duration) > 10;
+
+
+
+
+select NAME from phones
+JOIN CALLS ON phones.PHONE_NUMBER=CALLS.CALLEE
+UNION 
+select NAME from phones
+JOIN CALLS ON phones.PHONE_NUMBER=CALLS.CALLER
+GROUP BY NAME
+HAVING SUM(DURATION) > 10;
+// PART=========================02
+CREATE TABLE phones01
+(
+NAME varchar not null,
+PHONE_NUMBER INTEGER not null
+);
+
+CREATE OR REPLACE TABLE calls01
+(
+ID INTEGER NOT NULL,
+  CALLER INTEGER NOT NULL,
+  CALLEE INTEGER NOT NULL,
+  DURATION INTEGER NOT NULL,
+  unique(ID)
+);
+
+
+INSERT INTO PHONES01(NAME,PHONE_NUMBER) VALUES
+('John',6356),
+('Addison',4315),
+('Kate',8003),
+('Ginny',9831);
+
+INSERT INTO CALLS01 VALUES
+(65,8003,9831,7),
+(100,9831,8003,3),
+(145,4315,9831,18);
+
+
+select NAME from phones01
+JOIN CALLS01 ON phones01.PHONE_NUMBER=CALLS01.CALLER
+UNION 
+select NAME from phones01
+JOIN CALLS01 ON phones01.PHONE_NUMBER=CALLS01.CALLEE
+GROUP BY NAME
+HAVING SUM(DURATION) > 10;
+
+
+select * from CALLS
+select * from PHONES
+
+//TASK============================================ 03
+
+//PART=========================01
+CREATE TABLE transactions
+(
+amount integer not null,
+date date not null
+);
+
+ INSERT INTO transactions(amount,date) VALUES  (1000,'2020-01-06'),
+ (-10,'2020-01-14'),
+ (-75,'2020-01-20'),
+ (-5,'2020-01-25'),
+ (-4,'2020-01-29'),
+ (2000,'2020-03-10'),
+ (-75,'2020-03-12'),
+ (-20,'2020-03-15'),
+ (40,'2020-03-15'),
+ (-50,'2020-03-17'),
+ (200,'2020-10-10'),
+ (-200,'2020-10-10');
+
+
+select sum(amount) as total_balance,(total_balance-55)as total from transactions 
+
+//PART========================= 02
+CREATE TABLE transactions2
+(
+amount integer not null,
+date date not null
+);
+
+ INSERT INTO transactions2(amount,date) VALUES  (1,'2020-06-29'),
+ (35,'2020-02-20'),
+ (-50,'2020-02-03'),
+ (-1,'2020-02-26'),
+ (-200,'2020-08-01'),
+ (-44,'2020-02-07'),
+ (-5,'2020-02-25'),
+ (1,'2020-06-29'),
+ (1,'2020-06-29'),
+ (-100,'2020-12-29'),
+ (-100,'2020-12-30'),
+ (-100,'2020-12-31');
+ 
+select sum(amount) as total_balance,(total_balance-10*5)as total from transactions2
+
+//PART=========================03
+CREATE TABLE transactions3
+(
+amount integer not null,
+date date not null
+);
+
+ INSERT INTO transactions3(amount,date) VALUES  (6000,'2020-04-03'),
+ (5000,'2020-04-02'),
+ (4000,'2020-04-02'),
+ (3000,'2020-03-01'),
+ (2000,'2020-02-01'),
+ (1000,'2020-01-01');
+
+select sum(amount) as total_balance,(total_balance-12*5)as total from transactions3
