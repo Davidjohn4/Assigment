@@ -19,3 +19,7 @@ select country, max(population_growth_rate) as larget_population from cia_facboo
 -- 4. Which country has an extraordinary number for the population?
 select country, sum(population) as extraordinary_population from cia_facbook  group by population order by 2 desc;
 -- 5. Which is the most densely populated country in the world?
+
+select country , dense_rank()over(order by population) as world_dense_rank
+from cia_facbook
+order by world_dense_rank ;
