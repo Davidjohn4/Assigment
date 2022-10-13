@@ -16,8 +16,9 @@ ORDER BY a.accident_severity,vt.vehicle_type;
 
 -- 4. Calcullate the average Accident Severity and Total Accidents by motorcycle
 
-select avg(a.accident_severity) as average_severity
+select avg(a.accident_severity) as average_severity,count(vt.VECHILE_TYPE) as total_accidents
 from accident a
-JOIN vehicles v ON a.accident_index = v.accident_index
-JOIN vehicle_types vt ON v.vehicle_type = vt.vehicle_code
-group by vt.vehicle_type
+JOIN vechiles v ON a.accident_index = v.accident_index
+JOIN vechile_types vt ON v.VECHILE_TYPE = vt.VECHILE_CODE
+group by vt.VECHILE_TYPE
+
