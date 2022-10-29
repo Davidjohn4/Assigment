@@ -1,3 +1,16 @@
+
+-- 1. Evaluate the median severity value of accidents caused by various Motorcycles.
+select row_number() over(partition by vt.vehicle_type order by a.accident_severity) as rn,
+ a.*,v.*,vt.* from accident a
+left join vechiles v on v.accident_index=a.accident_index
+left join vechile_types vt on vt.vehicle_code=v.vehicle_type
+where 
+vt.vehicle_type like 'motorcycle%' 
+limit 0,200;
+
+
+
+
 -- 2. Evaluate Accident Severity and Total Accidents per Vehicle Type
 SELECT vt.vehicle_type, a.accident_severity,count(vt.vehicle_type) as total_accidents
 FROM accident a
